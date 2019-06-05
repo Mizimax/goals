@@ -37,7 +37,8 @@ options[0] = {
     },
     tooltip: {
         formatter: function(i) {
-            return '<b>' + this.series.name + '</b><br />Sales : <b>' + (this.y - this.series.yData[this.key-1]) + '</b><br />month : <b>' + months[this.x] + '</b>'
+            return '<b>' + this.series.name + '</b><br />Sales : <b>' + (this.y - this.series.yData[this.key - 1]) +
+                '</b><br />Month : <b>' + months[this.x] + '</b><br />Total : <b>' + this.y + '</b>'
         }
     }
 }
@@ -72,6 +73,12 @@ options[1] = {
         layout: 'vertical',
         align: 'right',
         verticalAlign: 'middle'
+    },
+    tooltip: {
+        formatter: function(i) {
+            return '<b>' + this.series.name + '</b><br />Sales : <b>' + (this.y - this.series.yData[this.key-1]) +
+                '</b><br />Month : <b>' + months[this.x] + '</b><br />Total : <b>' + this.y + '</b>'
+        }
     }
 }
 
