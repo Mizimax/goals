@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+import Highcharts from 'highcharts'
+import HighchartsReact from 'highcharts-react-official'
 import './App.css';
+import options from './graphOptions'
+import Graph from './components/Graph'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div>
+          {
+              options.map(item => (
+                  <HighchartsReact
+                      highcharts={Highcharts}
+                      options={item}
+                  />
+              ))
+          }
+
+      </div>
   );
 }
+
 
 export default App;
