@@ -35,6 +35,7 @@ options[0] = {
         }
     },
     yAxis: {
+        tickInterval: 200,
         title: {
             text: 'Sales'
         }
@@ -68,7 +69,7 @@ options[1] = {
         events: {
             load: function () {
                 this.yAxis[0].addPlotLine({
-                    value: 1000,
+                    value: 500,
                     color: 'red',
                     width: 3,
                     id: 'plot-line-1'
@@ -98,6 +99,7 @@ options[1] = {
         }
     },
     yAxis: {
+        tickInterval: 100,
         title: {
             text: 'Sales'
         }
