@@ -2,6 +2,13 @@ import { tcasData, khengData } from "./mockApi";
 
 const months = ['Jan','Feb','Mar','April','May','June','July','Aug','Sep','Oct','Nov','Dec']
 
+const colors = {
+    physic: '#673AB7',
+    math: '#ff9700',
+    chem: '#54bd13',
+    bio: '#d93030'
+}
+
 var options = [];
 
 options[0] = {
@@ -38,6 +45,7 @@ options[0] = {
             var serieSum = 0;
             return {
                 name: key,
+                color: colors[key],
                 data: value.map(val=>serieSum+=val)
             };
         })
@@ -77,6 +85,7 @@ options[1] = {
             var serieSum = 0;
             return {
                 name: key,
+                color: colors[key],
                 data: value.map(val=>serieSum+=val)
             };
         })
