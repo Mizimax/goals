@@ -5,6 +5,18 @@ const months = ['Jan','Feb','Mar','April','May','June','July','Aug','Sep','Oct',
 var options = [];
 
 options[0] = {
+    chart: {
+        events: {
+            load: function () {
+                this.yAxis[0].addPlotLine({
+                    value: 1000,
+                    color: 'red',
+                    width: 3,
+                    id: 'plot-line-1'
+                });
+            }
+        }
+    },
     title: {
         text: 'TCAS Goal'
     },
@@ -44,6 +56,18 @@ options[0] = {
 }
 
 options[1] = {
+    chart: {
+        events: {
+            load: function () {
+                this.yAxis[0].addPlotLine({
+                    value: 1000,
+                    color: 'red',
+                    width: 3,
+                    id: 'plot-line-1'
+                });
+            }
+        }
+    },
     title: {
         text: 'Kheng Goal'
     },
