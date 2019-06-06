@@ -1,4 +1,6 @@
-import { tcasData, khengData } from "./mockApi";
+import apiData from "./mockApi";
+
+const [ tcasData, kengData ] = apiData.data
 
 const months = ['Jan','Feb','Mar','April','May','June','July','Aug','Sep','Oct','Nov','Dec']
 
@@ -12,18 +14,7 @@ const colors = {
 var options = [];
 
 options[0] = {
-    chart: {
-        events: {
-            load: function () {
-                this.yAxis[0].addPlotLine({
-                    value: 1000,
-                    color: 'red',
-                    width: 3,
-                    id: 'plot-line-1'
-                });
-            }
-        }
-    },
+    name: 'คอร์สพิชิต TCAS',
     title: {
         text: 'TCAS Goal'
     },
@@ -41,15 +32,22 @@ options[0] = {
         }
     },
     series:
-        Object.keys(tcasData).map(key => {
-            var value = tcasData[key];
+        [...tcasData.map((item, index) => {
             var serieSum = 0;
             return {
-                name: key,
-                color: colors[key],
-                data: value.map(val=>serieSum+=val)
+                name: item.name,
+                color: colors[index],
+                data: item.data.map(val=>serieSum+=val)
             };
-        })
+        }),{
+            type: 'line',
+            color: '#888',
+            dashStyle: 'dash',
+            marker: { enabled: false },
+            enableMouseTracking: false,
+            /* function returns data for trend-line */
+            data: Array.from(Array(12),(val,index)=>(index+1)*1000/12)
+        }]
     ,
     legend: {
         layout: 'vertical',
@@ -65,31 +63,27 @@ options[0] = {
 }
 
 options[1] = {
-    chart: {
-        events: {
-            load: function () {
-                this.yAxis[0].addPlotLine({
-                    value: 500,
-                    color: 'red',
-                    width: 3,
-                    id: 'plot-line-1'
-                });
-            }
-        }
-    },
+    name: 'คอร์สเก่งม.ปลาย',
     title: {
-        text: 'Kheng Goal'
+        text: 'Keng Goal'
     },
     series:
-        Object.keys(khengData).map(key => {
-            var value = khengData[key];
+        [...kengData.map((item, index) => {
             var serieSum = 0;
             return {
-                name: key,
-                color: colors[key],
-                data: value.map(val=>serieSum+=val)
+                name: item.name,
+                color: colors[index],
+                data: item.data.map(val=>serieSum+=val)
             };
-        })
+        }),{
+            type: 'line',
+                color: '#888',
+                dashStyle: 'dash',
+                marker: { enabled: false },
+            enableMouseTracking: false,
+                /* function returns data for trend-line */
+                data: Array.from(Array(12),(val,index)=>(index+1)*500/12)
+        }]
     ,
     xAxis: {
         tickInterval: 1,
