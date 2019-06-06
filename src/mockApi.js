@@ -34,4 +34,14 @@ const kengData = [
     }
 ]
 
-export default { data: [tcasData, kengData] };
+const displayMap = {
+    physic: 'ฟิสิกส์',
+    chem: 'เคมี',
+    bio: 'ชีววิทยา',
+    math: 'คณิตศาสตร์'
+}
+
+const tcas = tcasData.map(item=> ({...item, display: displayMap[item.name] }))
+const keng = kengData.map(item=> ({...item, display: displayMap[item.name] }))
+
+export default { data: [tcas, keng] };

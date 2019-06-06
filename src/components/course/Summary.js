@@ -13,7 +13,7 @@ const Summary = (props) => (
             {
                 props.data.map(item => (
                     <TableData>
-                        <div>{item.name}</div>
+                        <div>{item.display}</div>
                         <div>{item.value}</div>
                     </TableData>
 

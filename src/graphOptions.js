@@ -36,7 +36,7 @@ options[0] = {
         [...tcasData.map((item, index) => {
             var serieSum = 0;
             return {
-                name: item.name,
+                name: item.display,
                 color: colors[item.name],
                 data: item.data.map(val=>serieSum+=val)
             };
@@ -73,7 +73,7 @@ options[1] = {
         [...kengData.map((item, index) => {
             var serieSum = 0;
             return {
-                name: item.name,
+                name: item.display,
                 color: colors[item.name],
                 data: item.data.map(val=>serieSum+=val)
             };

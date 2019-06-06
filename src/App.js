@@ -17,9 +17,11 @@ class App extends Component {
                     self.summary[index] = []
                 self.summary[index][i] = {}
                 self.summary[index][i]["name"] = it.name
+                self.summary[index][i]["display"] = it.display
                 self.summary[index][i]["value"] = it.data.reduce((a,b)=>a+b,0);
             })
         })
+
     }
 
     render()
