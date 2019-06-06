@@ -43,13 +43,11 @@ class App extends Component {
 
 const Header = styled.div`
     background-color: #00624B;
-    height: 180px;
     position: relative;
+    padding: 52px 0;
     & > div {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%,-50%);
+        position: relative;
+        margin: 0 auto;
         font-weight: bold;
         font-size: 48px;
         color: #fff;
