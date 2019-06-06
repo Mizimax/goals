@@ -50,7 +50,7 @@ const TableData = styled.div`
 
 const TableHeader = styled(TableData)`
     padding: 0;
-    font-size:13px;
+    font-size:14px;
     font-family: Tahoma;
     color: #636363;
     margin-bottom: 10px;

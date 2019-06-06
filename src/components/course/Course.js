@@ -8,7 +8,7 @@ import Summary from "./Summary";
 
 
 const Course = (props) => (
-    <div>
+
         <Container>
             <Name>{props.option.name}</Name>
             <Box>
@@ -21,7 +21,7 @@ const Course = (props) => (
                 </ChartContainer>
             </Box>
         </Container>
-    </div>
+
 )
 
 Course.propTypes = {
@@ -30,7 +30,6 @@ Course.propTypes = {
 }
 
 const Name = styled.div`
-    margin-top: 50px;
     margin-bottom: 10px;
     font-size: 30px;
     font-weight: bold;
@@ -56,11 +55,7 @@ const Box = styled.div`
 `
 
 const Container = styled.div`
-    max-width: 1200px;
-    margin: 0 20px;
-    @media (min-width: 1000px) {
-        margin: 0 auto;
-    }
+    margin: 50px 0;
 `
 
 const ChartContainer = styled.div`

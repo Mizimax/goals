@@ -32,12 +32,13 @@ class App extends Component {
                     <div style={{width:'100%'}} align="center">สรุป Goal 2019 Dek-D's School</div>
                 </Header>
 
-                {
-                    options.map((item, index) => (
-                        <Course option={item} summary={this.summary[index]} />
-                    ))
-                }
-
+                <Content>
+                    {
+                        options.map((item, index) => (
+                            <Course option={item} summary={this.summary[index]} />
+                        ))
+                    }
+                </Content>
             </MyApp>
         );
     }
@@ -46,13 +47,20 @@ class App extends Component {
 const Header = styled.div`
     background-color: #00624B;
     position: relative;
-    padding: 52px 0;
+    padding: 50px 0;
     & > div {
         position: relative;
-        margin: 0 auto;
         font-weight: bold;
         font-size: 48px;
         color: #fff;
+    }
+`
+
+const Content = styled.div`
+    max-width: 1200px;
+    margin: 0 20px;
+    @media (min-width: 1000px) {
+        margin: 0 auto;
     }
 `
 
