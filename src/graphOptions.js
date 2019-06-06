@@ -8,7 +8,8 @@ const colors = {
     physic: '#673AB7',
     math: '#ff9700',
     chem: '#54bd13',
-    bio: '#d93030'
+    bio: '#d93030',
+    AVG: '#555'
 }
 
 var options = [];
@@ -36,12 +37,13 @@ options[0] = {
             var serieSum = 0;
             return {
                 name: item.name,
-                color: colors[index],
+                color: colors[item.name],
                 data: item.data.map(val=>serieSum+=val)
             };
         }),{
             type: 'line',
-            color: '#888',
+            name: 'Average',
+            color: colors['AVG'],
             dashStyle: 'dash',
             marker: { enabled: false },
             enableMouseTracking: false,
@@ -72,12 +74,13 @@ options[1] = {
             var serieSum = 0;
             return {
                 name: item.name,
-                color: colors[index],
+                color: colors[item.name],
                 data: item.data.map(val=>serieSum+=val)
             };
         }),{
-            type: 'line',
-                color: '#888',
+                type: 'line',
+                name: 'Average',
+                color: colors['AVG'],
                 dashStyle: 'dash',
                 marker: { enabled: false },
             enableMouseTracking: false,
