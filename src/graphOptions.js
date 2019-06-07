@@ -1,4 +1,5 @@
 import apiData from "./mockApi";
+import { toComma } from "./utils";
 
 const [ tcasData, kengData ] = apiData.data
 
@@ -9,7 +10,7 @@ const colors = {
     math: '#ff9700',
     chem: '#54bd13',
     bio: '#d93030',
-    AVG: '#555'
+    goal: '#555'
 }
 
 var options = [];
@@ -30,6 +31,9 @@ options[0] = {
         tickInterval: 200,
         title: {
             text: 'Sales'
+        },
+        labels: {
+            format: '{value:,.0f}'
         }
     },
     series:
@@ -42,8 +46,8 @@ options[0] = {
             };
         }),{
             type: 'line',
-            name: 'Average',
-            color: colors['AVG'],
+            name: 'Goal',
+            color: colors['goal'],
             dashStyle: 'dash',
             marker: { enabled: false },
             enableMouseTracking: false,
@@ -59,7 +63,7 @@ options[0] = {
     tooltip: {
         formatter: function(i) {
             return '<b>' + this.series.name + '</b><br />Sales : <b>' + (this.y - this.series.yData[this.key - 1]) +
-                '</b><br />Month : <b>' + months[this.x] + '</b><br />Total : <b>' + this.y + '</b>'
+                '</b><br />Month : <b>' + months[this.x] + '</b><br />Total : <b>' + toComma(this.y) + '</b>'
         }
     }
 }
@@ -79,11 +83,11 @@ options[1] = {
             };
         }),{
                 type: 'line',
-                name: 'Average',
-                color: colors['AVG'],
+                name: 'Goal',
+                color: colors['goal'],
                 dashStyle: 'dash',
                 marker: { enabled: false },
-            enableMouseTracking: false,
+                enableMouseTracking: false,
                 /* function returns data for trend-line */
                 data: Array.from(Array(12),(val,index)=>(index+1)*500/12)
         }]
@@ -99,6 +103,9 @@ options[1] = {
         tickInterval: 100,
         title: {
             text: 'Sales'
+        },
+        labels: {
+            format: '{value:,.0f} €'
         }
     },
     legend: {
@@ -109,7 +116,7 @@ options[1] = {
     tooltip: {
         formatter: function(i) {
             return '<b>' + this.series.name + '</b><br />Sales : <b>' + (this.y - this.series.yData[this.key-1]) +
-                '</b><br />Month : <b>' + months[this.x] + '</b><br />Total : <b>' + this.y + '</b>'
+                '</b><br />Month : <b>' + months[this.x] + '</b><br />Total : <b>' + toComma(this.y) + '</b>'
         }
     }
 }

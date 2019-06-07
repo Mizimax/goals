@@ -6,6 +6,11 @@ import styled from 'styled-components';
 
 import Summary from "./Summary";
 
+Highcharts.setOptions({
+  lang: {
+    thousandsSep: ','
+  }
+});
 
 const Course = (props) => (
 
@@ -45,6 +50,7 @@ const Box = styled.div`
     flex-grow: 1;
     padding: 50px;
     flex-direction: column-reverse;
+    border-radius: 6px;
     @media (min-width: 768px) {
         flex-direction: row;
     }

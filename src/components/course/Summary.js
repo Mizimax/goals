@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { toComma } from "../../utils";
 
-
-const Summary = (props) => (
+const Summary = (props) => {
+  let sumSales = () => props.data.reduce((a, b) => a + b.value, 0)
+  return (
         <SummaryContainer>
             <TableHeader>
                 <div>วิชา</div>
@@ -14,7 +16,7 @@ const Summary = (props) => (
                 props.data.map(item => (
                     <TableData>
                         <div>{item.display}</div>
-                        <div>{item.value}</div>
+                        <div>{toComma(item.value)}</div>
                     </TableData>
 
                 ))
@@ -22,11 +24,12 @@ const Summary = (props) => (
 
             <TableDataSum>
                 <div >รวม</div>
-                <div style={{color: '#F23535'}}>{props.data.reduce((a, b) => a + b.value, 0)}</div>
+                <div style={{color: '#F23535'}}>{toComma(sumSales())}</div>
             </TableDataSum>
 
         </SummaryContainer>
-)
+  )
+}
 
 Summary.propTypes = {
     data: PropTypes.array

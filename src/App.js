@@ -29,7 +29,7 @@ class App extends Component {
         return (
             <MyApp>
                 <Header>
-                    <div style={{width:'100%'}} align="center">สรุป Goal 2019 Dek-D's School</div>
+                    <h1 align="center">สรุป Goal 2019 Dek-D's School</h1>
                 </Header>
 
                 <Content>
@@ -48,20 +48,18 @@ const Header = styled.div`
     background-color: #00624B;
     position: relative;
     padding: 50px 0;
-    & > div {
+    & > h1 {
         position: relative;
         font-weight: bold;
         font-size: 48px;
         color: #fff;
+        margin: unset;
     }
 `
 
 const Content = styled.div`
     max-width: 1200px;
-    margin: 0 20px;
-    @media (min-width: 1000px) {
-        margin: 0 auto;
-    }
+    margin: 0 auto;
 `
 
 const MyApp = styled.div`
