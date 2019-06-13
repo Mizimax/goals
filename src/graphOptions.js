@@ -1,8 +1,6 @@
 import apiData from "./mockApi";
 import { toComma } from "./utils";
 
-const [ tcasData, kengData ] = apiData.data
-
 const months = ['Jan','Feb','Mar','April','May','June','July','Aug','Sep','Oct','Nov','Dec']
 
 const colors = {
@@ -15,108 +13,113 @@ const colors = {
 
 var options = [];
 
-options[0] = {
-    name: 'คอร์สพิชิต TCAS',
-    title: {
-        text: 'TCAS Goal'
-    },
-    xAxis: {
-        tickInterval: 1,
-        labels: {
-            enabled: true,
-            formatter: function() { return months[this.value];},
-        }
-    },
-    yAxis: {
-        tickInterval: 200,
+if(apiData.data && apiData.data.length !== 0) {
+    const [ tcasData, kengData ] = apiData.data
+    options[0] = {
+        name: 'คอร์สพิชิต TCAS',
         title: {
-            text: 'Sales'
+            text: 'TCAS Goal'
         },
-        labels: {
-            format: '{value:,.0f}'
-        }
-    },
-    series:
-        [...tcasData.map((item, index) => {
-            var serieSum = 0;
-            return {
-                name: item.display,
-                color: colors[item.name],
-                data: item.data.map(val=>serieSum+=val)
-            };
-        }),{
-            type: 'line',
-            name: 'Goal',
-            color: colors['goal'],
-            dashStyle: 'dash',
-            marker: { enabled: false },
-            enableMouseTracking: false,
-            /* function returns data for trend-line */
-            data: Array.from(Array(12),(val,index)=>(index+1)*1000/12)
-        }]
-    ,
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
-    },
-    tooltip: {
-        formatter: function(i) {
-            return '<b>' + this.series.name + '</b><br />Sales : <b>' + (this.y - this.series.yData[this.key - 1]) +
-                '</b><br />Month : <b>' + months[this.x] + '</b><br />Total : <b>' + toComma(this.y) + '</b>'
+        xAxis: {
+            tickInterval: 1,
+            labels: {
+                enabled: true,
+                formatter: function () {
+                    return months[this.value];
+                },
+            }
+        },
+        yAxis: {
+            tickInterval: 200,
+            title: {
+                text: 'Sales'
+            },
+            labels: {
+                format: '{value:,.0f}'
+            }
+        },
+        series:
+          [...tcasData.map((item, index) => {
+              var serieSum = 0;
+              return {
+                  name: item.display,
+                  color: colors[item.name],
+                  data: item.data.map(val => serieSum += val)
+              };
+          }), {
+              type: 'line',
+              name: 'Goal',
+              color: colors['goal'],
+              dashStyle: 'dash',
+              marker: { enabled: false },
+              enableMouseTracking: false,
+              data: Array.from(Array(12), (val, index) => (index + 1) * 1000 / 12)
+          }]
+        ,
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        tooltip: {
+            formatter: function (i) {
+                return '<b>' + this.series.name + '</b><br />Sales : <b>' + (this.y - this.series.yData[this.key - 1]) +
+                  '</b><br />Month : <b>' + months[this.x] + '</b><br />Total : <b>' + toComma(this.y) + '</b>'
+            }
         }
     }
-}
 
-options[1] = {
-    name: 'คอร์สเก่งม.ปลาย',
-    title: {
-        text: 'Keng Goal'
-    },
-    series:
-        [...kengData.map((item, index) => {
-            var serieSum = 0;
-            return {
-                name: item.display,
-                color: colors[item.name],
-                data: item.data.map(val=>serieSum+=val)
-            };
-        }),{
-                type: 'line',
-                name: 'Goal',
-                color: colors['goal'],
-                dashStyle: 'dash',
-                marker: { enabled: false },
-                enableMouseTracking: false,
-                /* function returns data for trend-line */
-                data: Array.from(Array(12),(val,index)=>(index+1)*500/12)
-        }]
-    ,
-    xAxis: {
-        tickInterval: 1,
-        labels: {
-            enabled: true,
-            formatter: function() { return months[this.value];},
-        }
-    },
-    yAxis: {
-        tickInterval: 100,
+    options[1] = {
+        name: 'คอร์สเก่งม.ปลาย',
         title: {
-            text: 'Sales'
+            text: 'Keng Goal'
         },
-        labels: {
-            format: '{value:,.0f} €'
-        }
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
-    },
-    tooltip: {
-        formatter: function(i) {
-            return '<b>' + this.series.name + '</b><br />Sales : <b>' + (this.y - this.series.yData[this.key-1]) +
-                '</b><br />Month : <b>' + months[this.x] + '</b><br />Total : <b>' + toComma(this.y) + '</b>'
+        series:
+          [...kengData.map((item, index) => {
+              var serieSum = 0;
+              return {
+                  name: item.display,
+                  color: colors[item.name],
+                  data: item.data.map(val => serieSum += val)
+              };
+          }), {
+              type: 'line',
+              name: 'Goal',
+              color: colors['goal'],
+              dashStyle: 'dash',
+              marker: { enabled: false },
+              enableMouseTracking: false,
+              data: Array.from(Array(12), (val, index) => (index + 1) * 500 / 12)
+          }]
+        ,
+        xAxis: {
+            tickInterval: 1,
+            labels: {
+                enabled: true,
+                formatter: function () {
+                    return months[this.value];
+                },
+            }
+        },
+        yAxis: {
+            tickInterval: 100,
+            title: {
+                text: 'Sales'
+            },
+            labels: {
+                format: '{value:,.0f} €'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        tooltip: {
+            formatter: function (i) {
+                return '<b>' + this.series.name + '</b><br />Sales : <b>' + (this.y - this.series.yData[this.key - 1]) +
+                  '</b><br />Month : <b>' + months[this.x] + '</b><br />Total : <b>' + toComma(this.y) + '</b>'
+            }
         }
     }
 }
