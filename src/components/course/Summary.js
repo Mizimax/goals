@@ -6,33 +6,30 @@ import { toComma } from "../../utils";
 const Summary = (props) => {
   let sumSales = () => props.data.reduce((a, b) => a + b.value, 0)
   return (
-        <SummaryContainer>
-            <TableHeader>
-                <div>วิชา</div>
-                <div>ยอดขาย(คอร์ส)</div>
-            </TableHeader>
+    <SummaryContainer>
+      <TableHeader>
+        <div>วิชา</div>
+        <div>ยอดขาย(คอร์ส)</div>
+      </TableHeader>
+      {
+        props.data.map(item => (
+          <TableData>
+            <div>{item.display}</div>
+            <div>{toComma(item.value)}</div>
+          </TableData>
 
-            {
-                props.data.map(item => (
-                    <TableData>
-                        <div>{item.display}</div>
-                        <div>{toComma(item.value)}</div>
-                    </TableData>
-
-                ))
-            }
-
-            <TableDataSum>
-                <div >รวม</div>
-                <div style={{color: '#F23535'}}>{toComma(sumSales())}</div>
-            </TableDataSum>
-
-        </SummaryContainer>
+        ))
+      }
+      <TableDataSum>
+        <div >รวม</div>
+        <div style={{color: '#F23535'}}>{toComma(sumSales())}</div>
+      </TableDataSum>
+    </SummaryContainer>
   )
 }
 
 Summary.propTypes = {
-    data: PropTypes.array
+  data: PropTypes.array
 }
 
 const TableData = styled.div`
@@ -61,7 +58,7 @@ const TableHeader = styled(TableData)`
 
 const TableDataSum = styled(TableData)`
     font-weight: bold;
-    border: 1px 
+    border: 1px; 
     border-bottom: 1px solid #E5E5E5;
     position: relative;
     &:before {

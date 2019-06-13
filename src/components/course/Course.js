@@ -13,25 +13,23 @@ Highcharts.setOptions({
 });
 
 const Course = (props) => (
-
-        <Container>
-            <Name>{props.option.name}</Name>
-            <Box>
-                <Summary data={props.summary}></Summary>
-                <ChartContainer>
-                    <HighchartsReact
-                        highcharts={Highcharts}
-                        options={props.option}
-                    />
-                </ChartContainer>
-            </Box>
-        </Container>
-
+  <Container>
+    <Name>{props.option.name}</Name>
+    <Box>
+      <Summary data={props.summary}></Summary>
+      <ChartContainer>
+        <HighchartsReact
+          highcharts={Highcharts}
+          options={props.option}
+        />
+      </ChartContainer>
+    </Box>
+  </Container>
 )
 
 Course.propTypes = {
-    summary: PropTypes.array,
-    option: PropTypes.object
+  summary: PropTypes.array,
+  option: PropTypes.object
 }
 
 const Name = styled.div`

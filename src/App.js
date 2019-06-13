@@ -6,45 +6,42 @@ import apiData from "./mockApi";
 
 class App extends Component {
 
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        if(apiData.data && apiData.data.length !== 0) {
-            this.summary = []
-            var self = this;
-            apiData['data'].forEach((item, index) => {
-                item.forEach((it, i) => {
-                    if (!self.summary[index])
-                        self.summary[index] = []
-                    self.summary[index][i] = {}
-                    self.summary[index][i]["name"] = it.name
-                    self.summary[index][i]["display"] = it.display
-                    self.summary[index][i]["value"] = it.data.reduce((a, b) => a + b, 0);
-                })
-            })
-        }
-
-
+    if(apiData.data && apiData.data.length !== 0) {
+      this.summary = []
+      var self = this;
+      apiData['data'].forEach((item, index) => {
+        item.forEach((it, i) => {
+          if (!self.summary[index])
+            self.summary[index] = []
+          self.summary[index][i] = {}
+          self.summary[index][i]["name"] = it.name
+          self.summary[index][i]["display"] = it.display
+          self.summary[index][i]["value"] = it.data.reduce((a, b) => a + b, 0);
+        })
+      })
     }
+  }
 
-    render()
-    {
-        return (
-            <MyApp>
-                <Header>
-                    <h1 align="center">สรุป Goal 2019 Dek-D's School</h1>
-                </Header>
-
-                <Content>
-                    {
-                        options.map((item, index) => (
-                            <Course option={item} summary={this.summary[index]} />
-                        ))
-                    }
-                </Content>
-            </MyApp>
-        );
-    }
+  render()
+  {
+    return (
+      <MyApp>
+        <Header>
+          <h1 align="center">สรุป Goal 2019 Dek-D's School</h1>
+        </Header>
+        <Content>
+          {
+            options.map((item, index) => (
+              <Course option={item} summary={this.summary[index]} />
+            ))
+          }
+        </Content>
+      </MyApp>
+    );
+  }
 }
 
 const Header = styled.div`
