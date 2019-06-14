@@ -1,85 +1,75 @@
-import React from "react";
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { toComma } from "../../utils";
+import { toComma } from '../../utils'
 
-const Summary = (props) => {
-  let sumSales = () => props.data.reduce((a, b) => a + b.value, 0)
+const TableData = styled.div`
+  display: flex;
+  font-size: 24px;
+  color: #333;
+  padding: 6px 0;
+  &:nth-last-child(2) {
+    border-bottom: 1px solid #e5e5e5;
+  }
+`
+
+const Name = styled.div`
+  flex: 1;
+  padding-right: 10px;
+`
+
+const Value = styled.div`
+  flex: 0 0 40%;
+`
+
+const TableHeader = styled(TableData)`
+  padding: 0;
+  font-size: 14px;
+  font-family: Tahoma, 'sans-serif';
+  color: #636363;
+  margin-bottom: 10px;
+`
+
+const TableDataSum = styled(TableData)`
+  font-weight: bold;
+  border: 1px;
+  border-bottom: 1px solid #e5e5e5;
+  position: relative;
+  &:before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: -8px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+`
+
+const Summary = props => {
+  const sumSales = props.data.reduce((a, b) => a + b.value, 0)
   return (
-    <SummaryContainer>
+    <div>
       <TableHeader>
-        <div>วิชา</div>
-        <div>ยอดขาย(คอร์ส)</div>
+        <Name>วิชา</Name>
+        <Value>ยอดขาย(คอร์ส)</Value>
       </TableHeader>
-      {
-        props.data.map(item => (
-          <TableData>
-            <div>{item.display}</div>
-            <div>{toComma(item.value)}</div>
-          </TableData>
-
-        ))
-      }
+      {props.data.map(item => (
+        <TableData key={item.name}>
+          <Name>{item.display}</Name>
+          <Value>{toComma(item.value)}</Value>
+        </TableData>
+      ))}
       <TableDataSum>
-        <div >รวม</div>
-        <div style={{color: '#F23535'}}>{toComma(sumSales())}</div>
+        <Name>รวม</Name>
+        <Value style={{ color: '#F23535' }}>{toComma(sumSales)}</Value>
       </TableDataSum>
-    </SummaryContainer>
+    </div>
   )
 }
 
 Summary.propTypes = {
-  data: PropTypes.array
+  data: PropTypes.array,
 }
 
-const TableData = styled.div`
-    display: flex;
-    font-size: 24px;
-    color: #333;
-    padding: 6px 0;
-    & > div:first-child {
-        flex: 0 0 60%;
-    }
-    & > div:last-child {
-        flex: 0 0 40%;
-    }
-    &:nth-last-child(2) {
-        border-bottom: 1px solid #E5E5E5;
-    }
-`
-
-const TableHeader = styled(TableData)`
-    padding: 0;
-    font-size:14px;
-    font-family: Tahoma;
-    color: #636363;
-    margin-bottom: 10px;
-`
-
-const TableDataSum = styled(TableData)`
-    font-weight: bold;
-    border: 1px; 
-    border-bottom: 1px solid #E5E5E5;
-    position: relative;
-    &:before {
-      content: " ";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: -8px;
-      border-bottom: 1px solid #E5E5E5;
-    }
-`
-
-const SummaryContainer = styled.div`
-    min-width: calc(25% - 25px);
-    margin-right: 25px;
-    @media (max-width: 768px) {
-        margin-right: 0;
-        margin-top: 25px;
-    }
-`
-
-export default Summary;
-
+export default Summary
