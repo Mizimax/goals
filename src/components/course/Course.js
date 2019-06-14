@@ -43,15 +43,15 @@ Highcharts.setOptions({
   },
 })
 
-const Course = props => (
+const Course = ({ option, summary }) => (
   <div>
-    <Name>{props.option.name}</Name>
+    <Name>{option.name}</Name>
     <Box>
       <SummaryContainer>
-        <Summary data={props.summary} />
+        <Summary data={summary} />
       </SummaryContainer>
       <ChartContainer>
-        <HighchartsReact highcharts={Highcharts} options={props.option} />
+        <HighchartsReact highcharts={Highcharts} options={option} />
       </ChartContainer>
     </Box>
   </div>

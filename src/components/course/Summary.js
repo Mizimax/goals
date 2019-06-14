@@ -46,15 +46,15 @@ const TableDataSum = styled(TableData)`
   }
 `
 
-const Summary = props => {
-  const sumSales = props.data.reduce((a, b) => a + b.value, 0)
+const Summary = ({ data }) => {
+  const sumSales = data.reduce((a, b) => a + b.value, 0)
   return (
     <div>
       <TableHeader>
         <Name>วิชา</Name>
         <Value>ยอดขาย(คอร์ส)</Value>
       </TableHeader>
-      {props.data.map(item => (
+      {data.map(item => (
         <TableData key={item.name}>
           <Name>{item.display}</Name>
           <Value>{toComma(item.value)}</Value>

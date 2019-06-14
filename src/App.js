@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import options from './graphOptions'
 import Course from './components/course/Course'
@@ -28,30 +28,26 @@ const CourseContainer = styled.div`
   margin: 50px 0;
 `
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-    if (apiData.data && apiData.data.length !== 0) {
-      this.summary = apiData.data.map(course =>
-        course.map(data => ({ ...data, value: data.data.reduce((a, b) => a + b, 0) }))
-      )
-    }
-  }
-
-  render() {
-    return (
-      <MyApp>
-        <Header>สรุป Goal 2019 Dek-D's School</Header>
-        <Content>
-          {options.map((item, index) => (
-            <CourseContainer key={item.name}>
-              <Course option={item} summary={this.summary[index]} />
-            </CourseContainer>
-          ))}
-        </Content>
-      </MyApp>
+const App = () => {
+  let summary
+  if (apiData.data && apiData.data.length !== 0) {
+    summary = apiData.data.map(course =>
+      course.map(data => ({ ...data, value: data.data.reduce((a, b) => a + b, 0) }))
     )
   }
+  return (
+    <MyApp>
+      <Header>สรุป Goal 2019 Dek-D's School</Header>
+      <Content>
+        {summary &&
+          options.map((item, index) => (
+            <CourseContainer key={item.name}>
+              <Course option={item} summary={summary[index]} />
+            </CourseContainer>
+          ))}
+      </Content>
+    </MyApp>
+  )
 }
 
 export default App
