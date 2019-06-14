@@ -1,0 +1,8 @@
+node_modules/*
+node_modules/**
+**/node_modules/**
+**/coverage/**
+**/.next/**
+**/scripts/**
+react_bundle.js
+electron_bundle.js
