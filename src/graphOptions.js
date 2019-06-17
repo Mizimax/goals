@@ -1,5 +1,5 @@
 import goalData from './mockApi'
-import colors from './configs/colors'
+import COLORS from './configs/colors'
 import { toComma } from './utils'
 
 const months = [
@@ -18,10 +18,10 @@ const months = [
 ]
 
 const color = {
-  physic: colors.SUBJECT_PHY,
-  math: colors.SUBJECT_MATH,
-  chem: colors.SUBJECT_CHEM,
-  bio: colors.SUBJECT_BIO,
+  physic: COLORS.SUBJECT_PHY,
+  math: COLORS.SUBJECT_MATH,
+  chem: COLORS.SUBJECT_CHEM,
+  bio: COLORS.SUBJECT_BIO,
   goal: '#555555',
 }
 
@@ -30,10 +30,16 @@ const options = goalData.map(goal => ({
   title: {
     text: goal.graphName,
   },
+  chart: {
+    style: {
+      fontFamily: 'KaLaTeXaDisplay',
+    },
+  },
   xAxis: {
     tickInterval: 1,
     labels: {
       enabled: true,
+      // change array number to month
       formatter() {
         return months[this.value]
       },
@@ -48,18 +54,22 @@ const options = goalData.map(goal => ({
       format: '{value:,.0f}',
     },
   },
+  // set series sales in 1 year
   series: [
+    // add all goal data to array
     ...goal.data.map(sales => {
       let seriesSum = 0
       return {
         name: sales.name,
         color: color[sales.subjectCode],
+        // sum of previous sum and current value to show current sales
         data: sales.data.map(val => {
           seriesSum += val
           return seriesSum
         }),
       }
     }),
+    // add trend line of goal concat with data
     {
       type: 'line',
       name: 'เป้าหมาย',
@@ -67,6 +77,7 @@ const options = goalData.map(goal => ({
       dashStyle: 'dash',
       marker: { enabled: false },
       enableMouseTracking: false,
+      // create new array length = month and add value from calculated sales goal
       data: Array.from(
         Array(months.length),
         (val, index) => ((index + 1) * goal.salesGoal) / months.length

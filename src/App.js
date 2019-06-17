@@ -1,9 +1,9 @@
-import React from 'react'
 import _ from 'lodash'
+import React from 'react'
 import styled from 'styled-components'
-import colors from './configs/colors'
-import options from './graphOptions'
 import Course from './components/course/Course'
+import COLORS from './configs/colors'
+import options from './graphOptions'
 import goalData from './mockApi'
 
 const Header = styled.h1`
@@ -22,15 +22,24 @@ const Content = styled.div`
 `
 
 const MyApp = styled.div`
-  background-color: ${colors.GRAY_LIGHT_3};
+  background-color: ${COLORS.GRAY_LIGHT_3};
   padding-bottom: 50px;
+  box-sizing: border-box;
+  min-height: 100vh;
 `
 
 const CourseContainer = styled.div`
   margin: 50px 0;
 `
 
+const Error = styled.div`
+  padding: 150px 0;
+  text-align: center;
+  font-size: 24px;
+`
+
 const App = () => {
+  // sum sales in each month and use to summary data
   let summary
   if (!_.isEmpty(goalData)) {
     summary = goalData.map(course =>
@@ -41,12 +50,15 @@ const App = () => {
     <MyApp>
       <Header>สรุป Goal 2019 Dek-D's School</Header>
       <Content>
-        {summary &&
+        {summary ? (
           options.map((item, index) => (
             <CourseContainer key={item.name}>
               <Course option={item} summary={summary[index]} />
             </CourseContainer>
-          ))}
+          ))
+        ) : (
+          <Error>ไม่พบข้อมูล</Error>
+        )}
       </Content>
     </MyApp>
   )

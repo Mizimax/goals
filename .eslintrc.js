@@ -5,7 +5,8 @@ module.exports = {
   "plugins": ["prettier", "react", "jsx-a11y"],
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "extends": ["airbnb-base", "plugin:prettier/recommended",  "plugin:react/recommended"],
   "rules": {

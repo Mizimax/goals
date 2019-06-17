@@ -1,9 +1,10 @@
-import React from 'react'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import PropTypes from 'prop-types'
+import React from 'react'
 import styled from 'styled-components'
-import colors from '../../configs/colors'
+import COLORS from '../../configs/colors'
+import BREAKPOINTS from '../../configs/responsive'
 
 import Summary from './Summary'
 
@@ -11,7 +12,7 @@ const Name = styled.div`
   margin-bottom: 10px;
   font-size: 30px;
   font-weight: bold;
-  color: ${colors.ORANGE_THEME};
+  color: ${COLORS.ORANGE_THEME};
 `
 
 const Box = styled.div`
@@ -22,14 +23,15 @@ const Box = styled.div`
   padding: 50px;
   flex-direction: column-reverse;
   border-radius: 6px;
-  @media (min-width: 768px) {
+
+  @media (min-width: ${BREAKPOINTS.tablet}px) {
     flex-direction: row;
   }
 `
 
 const ChartContainer = styled.div`
   flex: 1;
-  @media (min-width: 768px) {
+  @media (min-width: ${BREAKPOINTS.tablet}px) {
     padding-left: 25px;
   }
 `
@@ -38,25 +40,27 @@ const SummaryContainer = styled.div`
   flex: 0 0 25%;
 `
 
-Highcharts.setOptions({
-  lang: {
-    thousandsSep: ',',
-  },
-})
-
-const Course = ({ option, summary }) => (
-  <div>
-    <Name>{option.name}</Name>
-    <Box>
-      <SummaryContainer>
-        <Summary data={summary} />
-      </SummaryContainer>
-      <ChartContainer>
-        <HighchartsReact highcharts={Highcharts} options={option} />
-      </ChartContainer>
-    </Box>
-  </div>
-)
+const Course = ({ option, summary }) => {
+  // set highchart option with thousands seperate
+  Highcharts.setOptions({
+    lang: {
+      thousandsSep: ',',
+    },
+  })
+  return (
+    <div>
+      <Name>{option.name}</Name>
+      <Box>
+        <SummaryContainer>
+          <Summary data={summary} />
+        </SummaryContainer>
+        <ChartContainer>
+          <HighchartsReact highcharts={Highcharts} options={option} />
+        </ChartContainer>
+      </Box>
+    </div>
+  )
+}
 
 Course.propTypes = {
   summary: PropTypes.array,
