@@ -3,6 +3,7 @@ import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import colors from '../../configs/colors'
 
 import Summary from './Summary'
 
@@ -10,7 +11,7 @@ const Name = styled.div`
   margin-bottom: 10px;
   font-size: 30px;
   font-weight: bold;
-  color: #f37a01;
+  color: ${colors.ORANGE_THEME};
 `
 
 const Box = styled.div`

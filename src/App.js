@@ -1,8 +1,10 @@
 import React from 'react'
+import _ from 'lodash'
 import styled from 'styled-components'
+import colors from './configs/colors'
 import options from './graphOptions'
 import Course from './components/course/Course'
-import apiData from './mockApi'
+import goalData from './mockApi'
 
 const Header = styled.h1`
   background-color: #00624b;
@@ -20,7 +22,7 @@ const Content = styled.div`
 `
 
 const MyApp = styled.div`
-  background-color: #f2f2f2;
+  background-color: ${colors.GRAY_LIGHT_3};
   padding-bottom: 50px;
 `
 
@@ -30,9 +32,9 @@ const CourseContainer = styled.div`
 
 const App = () => {
   let summary
-  if (apiData.data && apiData.data.length !== 0) {
-    summary = apiData.data.map(course =>
-      course.map(data => ({ ...data, value: data.data.reduce((a, b) => a + b, 0) }))
+  if (!_.isEmpty(goalData)) {
+    summary = goalData.map(course =>
+      course.data.map(sales => ({ ...sales, value: sales.data.reduce((a, b) => a + b, 0) }))
     )
   }
   return (

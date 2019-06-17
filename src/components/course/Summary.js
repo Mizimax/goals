@@ -1,15 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import colors from '../../configs/colors'
 import { toComma } from '../../utils'
 
 const TableData = styled.div`
   display: flex;
   font-size: 24px;
-  color: #333;
+  color: ${colors.GRAY_DARK_3};
   padding: 6px 0;
   &:nth-last-child(2) {
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid ${colors.GRAY_LIGHT_2};
   }
 `
 
@@ -26,14 +27,14 @@ const TableHeader = styled(TableData)`
   padding: 0;
   font-size: 14px;
   font-family: Tahoma, 'sans-serif';
-  color: #636363;
+  color: ${colors.GRAY_DARK_2};
   margin-bottom: 10px;
 `
 
 const TableDataSum = styled(TableData)`
   font-weight: bold;
   border: 1px;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid ${colors.GRAY_LIGHT_2};
   position: relative;
   &:before {
     content: ' ';
@@ -42,7 +43,7 @@ const TableDataSum = styled(TableData)`
     left: 0;
     right: 0;
     bottom: -8px;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid ${colors.GRAY_LIGHT_2};
   }
 `
 
@@ -56,13 +57,13 @@ const Summary = ({ data }) => {
       </TableHeader>
       {data.map(item => (
         <TableData key={item.name}>
-          <Name>{item.display}</Name>
+          <Name>{item.name}</Name>
           <Value>{toComma(item.value)}</Value>
         </TableData>
       ))}
       <TableDataSum>
         <Name>รวม</Name>
-        <Value style={{ color: '#F23535' }}>{toComma(sumSales)}</Value>
+        <Value style={{ color: colors.RED }}>{toComma(sumSales)}</Value>
       </TableDataSum>
     </div>
   )

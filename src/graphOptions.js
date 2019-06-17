@@ -1,4 +1,5 @@
-import apiData from './mockApi'
+import goalData from './mockApi'
+import colors from './configs/colors'
 import { toComma } from './utils'
 
 const months = [
@@ -16,141 +17,77 @@ const months = [
   'Dec',
 ]
 
-const colors = {
-  physic: '#673AB7',
-  math: '#ff9700',
-  chem: '#54bd13',
-  bio: '#d93030',
-  goal: '#555',
+const color = {
+  physic: colors.SUBJECT_PHY,
+  math: colors.SUBJECT_MATH,
+  chem: colors.SUBJECT_CHEM,
+  bio: colors.SUBJECT_BIO,
+  goal: '#555555',
 }
 
-const options = []
-
-if (apiData.data && apiData.data.length !== 0) {
-  const [tcasData, kengData] = apiData.data
-  options[0] = {
-    name: 'คอร์สพิชิต TCAS',
-    title: {
-      text: 'TCAS Goal',
-    },
-    xAxis: {
-      tickInterval: 1,
-      labels: {
-        enabled: true,
-        formatter() {
-          return months[this.value]
-        },
-      },
-    },
-    yAxis: {
-      tickInterval: 200,
-      title: {
-        text: 'Sales',
-      },
-      labels: {
-        format: '{value:,.0f}',
-      },
-    },
-    series: [
-      ...tcasData.map(item => {
-        let serieSum = 0
-        return {
-          name: item.display,
-          color: colors[item.name],
-          data: item.data.map(val => {
-            serieSum += val
-            return serieSum
-          }),
-        }
-      }),
-      {
-        type: 'line',
-        name: 'Goal',
-        color: colors.goal,
-        dashStyle: 'dash',
-        marker: { enabled: false },
-        enableMouseTracking: false,
-        data: Array.from(Array(12), (val, index) => ((index + 1) * 1000) / 12),
-      },
-    ],
-    legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'middle',
-    },
-    tooltip: {
+const options = goalData.map(goal => ({
+  name: goal.graphName,
+  title: {
+    text: goal.graphName,
+  },
+  xAxis: {
+    tickInterval: 1,
+    labels: {
+      enabled: true,
       formatter() {
-        return `
+        return months[this.value]
+      },
+    },
+  },
+  yAxis: {
+    tickInterval: 200,
+    title: {
+      text: 'Sales',
+    },
+    labels: {
+      format: '{value:,.0f}',
+    },
+  },
+  series: [
+    ...goal.data.map(sales => {
+      let seriesSum = 0
+      return {
+        name: sales.name,
+        color: color[sales.subjectCode],
+        data: sales.data.map(val => {
+          seriesSum += val
+          return seriesSum
+        }),
+      }
+    }),
+    {
+      type: 'line',
+      name: 'เป้าหมาย',
+      color: color.goal,
+      dashStyle: 'dash',
+      marker: { enabled: false },
+      enableMouseTracking: false,
+      data: Array.from(
+        Array(months.length),
+        (val, index) => ((index + 1) * goal.salesGoal) / months.length
+      ),
+    },
+  ],
+  legend: {
+    layout: 'vertical',
+    align: 'right',
+    verticalAlign: 'middle',
+  },
+  tooltip: {
+    formatter() {
+      return `
           <b>${this.series.name}</b><br />
           Sales : <b>${this.y - this.series.yData[this.key - 1]}</b><br />
           Month : <b>${months[this.x]}</b><br />
           Total : <b>${toComma(this.y)}</b>
         `
-      },
     },
-  }
-
-  options[1] = {
-    name: 'คอร์สเก่งม.ปลาย',
-    title: {
-      text: 'Keng Goal',
-    },
-    series: [
-      ...kengData.map(item => {
-        let serieSum = 0
-        return {
-          name: item.display,
-          color: colors[item.name],
-          data: item.data.map(val => {
-            serieSum += val
-            return serieSum
-          }),
-        }
-      }),
-      {
-        type: 'line',
-        name: 'Goal',
-        color: colors.goal,
-        dashStyle: 'dash',
-        marker: { enabled: false },
-        enableMouseTracking: false,
-        data: Array.from(Array(12), (val, index) => ((index + 1) * 500) / 12),
-      },
-    ],
-    xAxis: {
-      tickInterval: 1,
-      labels: {
-        enabled: true,
-        formatter() {
-          return months[this.value]
-        },
-      },
-    },
-    yAxis: {
-      tickInterval: 100,
-      title: {
-        text: 'Sales',
-      },
-      labels: {
-        format: '{value:,.0f} €',
-      },
-    },
-    legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'middle',
-    },
-    tooltip: {
-      formatter() {
-        return `
-            <b>${this.series.name}</b><br />
-            Sales : <b>${this.y - this.series.yData[this.key - 1]}</b><br />
-            Month : <b>${months[this.x]}</b><br />
-            Total : <b>${toComma(this.y)}</b>
-        `
-      },
-    },
-  }
-}
+  },
+}))
 
 export default options
