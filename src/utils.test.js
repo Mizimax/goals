@@ -52,6 +52,18 @@ const failSpec = [
     },
     result: 'Number, String format only',
   },
+  {
+    args: {
+      num: null,
+    },
+    result: 'Number, String format only',
+  },
+  {
+    args: {
+      num: undefined,
+    },
+    result: 'Number, String format only',
+  },
 ]
 
 describe(`toComma(num) : num(Number,String)`, () => {
