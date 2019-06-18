@@ -45,12 +45,14 @@ const specs = [
   },
 ]
 
-const failSpec = {
-  args: {
-    num: {},
+const failSpec = [
+  {
+    args: {
+      num: {},
+    },
+    result: 'Number, String format only',
   },
-  result: 'Number, String format only',
-}
+]
 
 describe(`toComma(num) : num(Number,String)`, () => {
   specs.forEach(({ args, result }) => {
@@ -60,7 +62,9 @@ describe(`toComma(num) : num(Number,String)`, () => {
       expect(toComma(args.num)).toBe(result)
     })
   })
-  it(`should throw Error(${failSpec.result}), when passing props: ${failSpec.args.num}`, () => {
-    expect(() => toComma(failSpec.args.num)).toThrow(failSpec.result)
+  failSpec.forEach(({ args, result }) => {
+    it(`should throw Error(${result}), when passing props: ${args.num}`, () => {
+      expect(() => toComma(args.num)).toThrow(result)
+    })
   })
 })
