@@ -1,5 +1,6 @@
 /*  object of data each month and each course */
-const data = window.DATA
+/* global DATA */
+const data = DATA
 
 const defaultConfigs = {
   graphName: '',
