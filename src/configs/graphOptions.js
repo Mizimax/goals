@@ -17,14 +17,14 @@ const months = [
   'Dec',
 ]
 
-const color = {
-  physic: COLORS.SUBJECT_PHY,
-  math: COLORS.SUBJECT_MATH,
-  chem: COLORS.SUBJECT_CHEM,
-  bio: COLORS.SUBJECT_BIO,
+const COLOR = {
+  PHY: COLORS.SUBJECT_PHY,
+  MATH: COLORS.SUBJECT_MATH,
+  CHEM: COLORS.SUBJECT_CHEM,
+  BIO: COLORS.SUBJECT_BIO,
   goal: '#555555',
 }
-
+console.log(goalData)
 const options = goalData.map(goal => ({
   name: goal.graphName,
   title: {
@@ -61,7 +61,7 @@ const options = goalData.map(goal => ({
       let seriesSum = 0
       return {
         name: sales.name,
-        color: color[sales.subjectCode],
+        color: COLOR[sales.subjectCode],
         // sum of previous sum and current value to show current sales
         data: sales.data.map(val => {
           seriesSum += val
@@ -73,7 +73,7 @@ const options = goalData.map(goal => ({
     {
       type: 'line',
       name: 'เป้าหมาย',
-      color: color.goal,
+      color: COLOR.goal,
       dashStyle: 'dash',
       marker: { enabled: false },
       enableMouseTracking: false,
@@ -93,7 +93,7 @@ const options = goalData.map(goal => ({
     formatter() {
       return `
           <b>${this.series.name}</b><br />
-          Sales : <b>${this.y - this.series.yData[this.key - 1]}</b><br />
+          Sales : <b>${this.y - this.series.yData[this.key - 1] || this.y}</b><br />
           Month : <b>${months[this.x]}</b><br />
           Total : <b>${toComma(this.y)}</b>
         `

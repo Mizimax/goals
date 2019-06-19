@@ -8,11 +8,11 @@ const defaultConfigs = {
 }
 
 const configs = {
-  tcas: {
+  TCAS: {
     graphName: 'คอร์สพิชิต TCAS',
     salesGoal: 1000,
   },
-  keng: {
+  KENG: {
     graphName: 'คอร์สเก่งม.ปลาย',
     salesGoal: 500,
   },
