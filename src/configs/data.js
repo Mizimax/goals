@@ -1,6 +1,6 @@
 /*  object of data each month and each course */
 /* global DATA */
-const data = DATA
+const data = typeof DATA !== 'undefined' ? DATA : {}
 
 const defaultConfigs = {
   graphName: '',
