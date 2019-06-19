@@ -1,6 +1,6 @@
-import COLORS from './configs/colors'
-import goalData from './mockApi'
-import { toComma } from './utils'
+import COLORS from './colors'
+import goalData from './data'
+import { toComma } from '../utils'
 
 const months = [
   'Jan',

@@ -3,8 +3,8 @@ import React from 'react'
 import styled from 'styled-components'
 import Course from './components/course/Course'
 import COLORS from './configs/colors'
-import options from './graphOptions'
-import goalData from './mockApi'
+import options from './configs/graphOptions'
+import goalData from './configs/data'
 
 const Header = styled.h1`
   background-color: #00624b;
